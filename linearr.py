@@ -1,32 +1,14 @@
-def calcCoef(x, y, n):
-	sigX = sum(x)
-	sigY = sum(y)
-	sigX2 = calcSumX2(x, n)
-	sigXY = calcSumXY(x, y, n)
-
-	a = (n * sigXY - sigX * sigY) / (n * sigX2 - sigX ** 2)
-	b = (sigY - a * sigX) /	n
-
-	return [a, b]
-
-		
-def calcSumXY(x, y, n):
-	ret = 0
-
-	for i in range(n):
-		ret += x[i] * y[i]
-		
-	return ret
-
-def calcSumX2(x, n):
-	ret = 0
-
-	for i in range(n):
-		ret += x[i] ** 2
-
-	return ret
+import numpy as np
 
 
- 
+def calc_coef(x, y):
+    n = len(x)
+    sig_x = sum(x)
+    sig_y = sum(y)
+    sig_x2 = np.dot(x, x)
+    sig_xy = np.dot(x, y)
 
-		
+    a = (n * sig_xy - sig_x * sig_y) / (n * sig_x2 - sig_x ** 2)
+    b = (sig_y - a * sig_x) / n
+
+    return a, b
